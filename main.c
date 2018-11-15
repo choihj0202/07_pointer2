@@ -3,43 +3,47 @@
 
 /* run this program using the console pauser or add your own getch, system("pause") or input loop */
 
-int sum(int a, int b)
-{	
-	return a+b;
-} 
-
-int subtract(int a, int b)
-{	
-	return a-b;
+void print_image(int image [][5])
+{
+	int i, j;
+	for (i=0; i<5; i++)
+	{
+		for (j=0; j<5; j++)
+		{
+			printf("%d ", image[i][j]);	
+		}
+		printf("\n");
+	}
+	printf("\n");
 }
 
-int time(int a, int b)
-{	
-	return a*b;
-}
-
-int divide(int a, int b)
-{	
-	return a/b;
+void brighten_image(int image[][5])
+{
+	int i, j;
+	int *ptr = &image[0][0];
+	
+	for (i=0; i<5; i++)
+	{
+		for (j=0; j<5; j++)
+		{
+			*ptr += 10;
+			ptr++;
+		}
+	}
 }
 
 int main(int argc, char *argv[]) {
 	
-	int num1, num2;
-	int (*calculation)(int, int);
-	char ch;
+	int image[5][5] = {
+	{10, 20, 30, 40, 50},
+	{10, 20, 30, 40, 50},
+	{10, 20, 30, 40, 50},
+	{10, 20, 30, 40, 50},
+	{10, 20, 30, 40, 50}
+	};
 	
-	printf("input calculation : ");
-	scanf("%d %c %d", &num1, &ch, &num2);
-	
-	switch (ch)
-	{
-		case '+' : calculation = sum; break;
-		case '-' : calculation = subtract; break;
-		case '*' : calculation = time; break;
-		case '/' : calculation = divide; break;
-	}
-	
-	printf("output : %d\n", calculation(num1, num2));
+	print_image(image);
+	brighten_image(image);
+	print_image(image);
 	return 0;
 }
